@@ -1,4 +1,3 @@
-import eventCard from "./eventCard";
 import {
   Color,
   Rect,
@@ -47,7 +46,8 @@ const Container = ({ component }: { component: ContainerComponent }) => {
   };
 
   return (
-    <div style={containerStyle}>
+    <>
+      <div style={containerStyle} />
       {component.children.map((item) => {
         switch (item.type) {
           case "container":
@@ -60,34 +60,56 @@ const Container = ({ component }: { component: ContainerComponent }) => {
             return <Ellipse component={item} />;
         }
       })}
-    </div>
+    </>
   );
 };
 
 const Text = ({ component }: { component: TextComponent }) => {
-  let textStyle = {
-    ...getRect(component.frame),
-    fontSize: `${component.fontSize}px`,
-    fontWeight: `${component.fontWeight}`,
-    fontFamily: `${component.fontFamily}`,
-    color: rgbaColor(component.textColor)
-  };
-  return <div style={textStyle}>{component.content}</div>;
+  return (
+    <div
+      style={{
+        ...getRect(component.frame),
+        fontSize: `${component.fontSize}px`,
+        fontWeight: `${component.fontWeight}`,
+        fontFamily: `${component.fontFamily}`,
+        color: rgbaColor(component.textColor)
+      }}
+    >
+      {component.content}
+    </div>
+  );
 };
 
 const Rectangle = ({ component }: { component: RectangleComponent }) => {
-  let rectangleStyle = {
-    ...getRect(component.frame),
-    backgroundColor: rgbaColor(component.backgroundColor),
-    borderRadius: `${component.cornerRadius}px`
-  };
-  return <div style={rectangleStyle} />;
+  return (
+    <div
+      style={{
+        ...getRect(component.frame),
+        ...getStroke(component.border),
+        backgroundColor: rgbaColor(component.backgroundColor),
+        borderRadius: `${component.cornerRadius}px`
+      }}
+    />
+  );
 };
 
 const Ellipse = ({ component }: { component: EllipseComponent }) => {
-  return <>Ellipse</>;
+  return (
+    <div
+      style={{
+        ...getRect(component.frame),
+        ...getStroke(component.border),
+        backgroundColor: rgbaColor(component.backgroundColor),
+        borderRadius: `50%`
+      }}
+    ></div>
+  );
 };
 
-export const CardBody = () => {
-  return <Container component={eventCard} />;
+export const CardBody = ({ component }: { component: ContainerComponent }) => {
+  return (
+    <div style={{ position: "relative" }}>
+      <Container component={component} />
+    </div>
+  );
 };
