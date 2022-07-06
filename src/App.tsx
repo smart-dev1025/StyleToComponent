@@ -1,6 +1,6 @@
 import "./styles.css";
-import { FunctionBody } from "./component/cardBody";
-import { ClassBody } from "./component/base";
+import { FunctionBody } from "./component/functionBody";
+import { ClassBody } from "./component/classBody";
 import eventCard from "./samples/eventCard";
 import listScreen from "./samples/listScreen";
 import loginScreen from "./samples/loginScreen";
