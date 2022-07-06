@@ -89,7 +89,9 @@ export class CompText<T extends TextComponent> extends CompBase<T> {
     };
   }
   render() {
-    return <div style={this.style}>{this.component.content}</div>;
+    return (
+      <div style={this.style}>{(this.component as TextComponent).content}</div>
+    );
   }
 }
 
