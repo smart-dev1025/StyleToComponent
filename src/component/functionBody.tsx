@@ -106,7 +106,11 @@ const Ellipse = ({ component }: { component: EllipseComponent }) => {
   );
 };
 
-export const CardBody = ({ component }: { component: ContainerComponent }) => {
+export const FunctionBody = ({
+  component
+}: {
+  component: ContainerComponent;
+}) => {
   return (
     <div style={{ position: "relative" }}>
       <Container component={component} />

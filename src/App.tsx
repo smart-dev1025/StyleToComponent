@@ -1,5 +1,6 @@
 import "./styles.css";
-import { CardBody } from "./component/cardBody";
+import { FunctionBody } from "./component/cardBody";
+import { ClassBody } from "./component/base";
 import eventCard from "./samples/eventCard";
 import listScreen from "./samples/listScreen";
 import loginScreen from "./samples/loginScreen";
@@ -8,13 +9,22 @@ import profileHeader from "./samples/profileHeader";
 export default function App() {
   return (
     <div className="App">
-      <CardBody component={eventCard} />
+      <ClassBody component={eventCard} />
       <div style={{ height: "100px" }} />
-      <CardBody component={listScreen} />
+      <ClassBody component={listScreen} />
       <div style={{ height: "460px" }} />
-      <CardBody component={loginScreen} />
+      <ClassBody component={loginScreen} />
       <div style={{ height: "380px" }} />
-      <CardBody component={profileHeader} />
+      <ClassBody component={profileHeader} />
+      <div style={{ height: "300px" }} />
+
+      <FunctionBody component={eventCard} />
+      <div style={{ height: "100px" }} />
+      <FunctionBody component={listScreen} />
+      <div style={{ height: "460px" }} />
+      <FunctionBody component={loginScreen} />
+      <div style={{ height: "380px" }} />
+      <FunctionBody component={profileHeader} />
       <div style={{ height: "300px" }} />
     </div>
   );
