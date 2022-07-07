@@ -10,8 +10,9 @@ import {
   RectangleComponent,
   EllipseComponent
 } from "../componentTypes";
+import CSS from "csstype";
 
-const getRect = (rect: Rect | undefined) => {
+const getRect = (rect: Rect | undefined): CSS.Properties | undefined => {
   return rect
     ? {
         position: `absolute`,
@@ -20,7 +21,7 @@ const getRect = (rect: Rect | undefined) => {
         width: `${rect.width}px`,
         height: `${rect.height}px`
       }
-    : {};
+    : undefined;
 };
 
 const getStroke = (stroke: Stroke | undefined) => {
@@ -28,7 +29,7 @@ const getStroke = (stroke: Stroke | undefined) => {
     ? {
         border: `${stroke.width}px solid rgb(${stroke.color.r}, ${stroke.color.g}, ${stroke.color.b}, ${stroke.color.a})`
       }
-    : {};
+    : undefined;
 };
 
 const rgbaColor = (color: Color | undefined) => {
@@ -39,30 +40,13 @@ const rgbaColor = (color: Color | undefined) => {
     : "";
 };
 
-interface StyleState {
-  position?: string;
-  left?: string;
-  top?: string;
-  width?: string;
-  height?: string;
-  border?: string;
-  color?: string;
-  fontSize?: string;
-  fontWeight?: string;
-  fontFamily?: string;
-  backgroundColor?: string;
-  borderRadius?: string;
-}
-
 export class CompBase<T extends BaseComponent> extends React.Component<T> {
   protected component: BaseComponent | undefined;
-  protected style: StyleState | "";
+  protected style: CSS.Properties | undefined;
   constructor(component: BaseComponent) {
-    super();
+    super(component as T);
     this.component = component;
-    this.style = {
-      ...getRect(component.frame)
-    };
+    this.style = getRect(component.frame);
   }
 }
 
@@ -156,7 +140,7 @@ export class CompContainer<T extends ContainerComponent> extends CompWithFill<
 export class ClassBody extends React.Component {
   private component: ContainerComponent;
   constructor({ component }: { component: ContainerComponent }) {
-    super();
+    super(component);
     this.component = component;
   }
 
